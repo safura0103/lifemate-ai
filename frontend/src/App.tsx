@@ -114,53 +114,7 @@ function speak(text: string){
     window.speechSynthesis.speak(utterance);
   }
 }
-{const SR=(window as any).SpeechRecognition||(window as any).webkitSpeechRecognition;if(!SR){setError('Voice input is not supported in this browser. Try Chrome or use text input.');return}const rec=new SR();rec.lang='en-IN';rec.interimResults=false;rec.onresult=(e:any)=>{const t=e.results[0][0].transcript;setMessage(t);};rec.onerror=()=>setError('Microphone unavailable. Check browser permission.');rec.start()}
- 
-function startVoice(){
-  const SR = (window as any).SpeechRecognition ||
-             (window as any).webkitSpeechRecognition;
 
-  if (!SR) {
-    setError('Voice input is not supported in this browser. Try Chrome or use text input.');
-    return;
-  }
-
-  const rec = new SR();
-  rec.lang = language;
-  rec.interimResults = false;
-  rec.continuous = false;
-
-  rec.onresult = (e: any) => {
-    const spokenText = e.results[0][0].transcript;
-    setMessage(spokenText);
-  };
-
-  rec.onerror = () => {
-    setError('Microphone unavailable. Check browser permission and try again.');
-  };
-
-  rec.start();
-}
-
-function speak(text: string){
-  if ('speechSynthesis' in window) {
-    window.speechSynthesis.cancel();
-
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = language;
-
-    const voices = window.speechSynthesis.getVoices();
-    const matchingVoice = voices.find(
-      voice => voice.lang.toLowerCase() === language.toLowerCase()
-    );
-
-    if (matchingVoice) {
-      utterance.voice = matchingVoice;
-    }
-
-    window.speechSynthesis.speak(utterance);
-  }
-}
 
  async function uploadFile(file?:File){if(!file)return;const fd=new FormData();fd.append('file',file);await doAction(async()=>{const r=await fetch(API+'/documents/upload',{method:'POST',headers:{Authorization:`Bearer ${token}`},body:fd});const d=await r.json();if(!r.ok)throw new Error(d.detail||'Upload failed');setDocFocus(d);setPage('Documents')})}
  const filteredDocs=docs.filter(d=>d.filename.toLowerCase().includes(search.toLowerCase()));
