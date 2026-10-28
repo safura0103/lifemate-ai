@@ -27,7 +27,18 @@ SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False)
 Base = declarative_base()
 pwd = CryptContext(schemes=["argon2"], deprecated="auto")
 app = FastAPI(title="LifeMate AI API", version="1.0.0", description="Multi-Agent Personal Assistant API")
-app.add_middleware(CORSMiddleware, allow_origins=[os.getenv("FRONTEND_ORIGIN", "http://localhost:5173")], allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:5173",
+        "http://localhost:5174",
+        os.getenv("FRONTEND_ORIGIN", ""),
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 class User(Base):
     __tablename__="users"
