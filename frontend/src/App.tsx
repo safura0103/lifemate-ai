@@ -2,7 +2,7 @@ import React, {useEffect,useMemo,useState} from 'react';
 import {Activity, Bell, Bot, CalendarDays, Check, ChevronLeft, ChevronRight, CircleDollarSign, ClipboardList, FileText, HeartPulse, Home, LogOut, Menu, Mic, Plus, Search, Send, Settings, ShieldCheck, Sparkles, Trash2, UploadCloud, UserRound, Wallet, X, CheckCircle2, Clock, TrendingUp, FileUp, MessageCircle} from 'lucide-react';
 import {ResponsiveContainer,BarChart,Bar,XAxis,YAxis,Tooltip,CartesianGrid} from 'recharts';
 
-const API='https://lifemate-ai-backend.onrender.com/api';
+const API = 'https://lifemate-ai-backend.onrender.com/api';
 type AnyObj={ [key:string]:any };
 function money(n:number){return new Intl.NumberFormat('en-IN',{style:'currency',currency:'INR',maximumFractionDigits:2}).format(n||0)}
 function dateStr(d=new Date()){return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
