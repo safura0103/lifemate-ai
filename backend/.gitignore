@@ -1,0 +1,7 @@
+__pycache__/
+*.py[cod]
+.venv/
+.env
+lifemate.db
+uploads/
+.pytest_cache/
